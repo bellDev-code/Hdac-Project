@@ -71,7 +71,7 @@ const config = {
   },
   devServer: {
     historyApiFallback: true, // react router
-    port: 3090,
+    port: 3080,
     publicPath: '/dist/',
     // proxy: {
     //   '/api/': {
