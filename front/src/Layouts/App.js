@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Login from '@Pages/Login';
 import Main from './Main';
+import Login from '@Pages/Login';
 import Register from '@Pages/Register';
 
 const App = () => {

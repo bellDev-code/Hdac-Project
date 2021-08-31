@@ -13,8 +13,8 @@ const Login = () => {
       <AccountForm>
         <h3>Login</h3>
         <LoginForm onSubmit={LoginSubmit}>
-          <label>username</label>
-          <input type="text" />
+          <label>e-mail</label>
+          <input type="email" />
           <label>password</label>
           <input type="password" />
           <ButtonWrapper>
