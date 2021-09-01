@@ -7,4 +7,11 @@ export const Container = styled.div`
 
 export const LinkWrapper = styled.div`
   margin: auto;
+  display: flex;
+  align-items: center;
+
+  & > :link {
+    text-decoration: none;
+    padding: 5px;
+  }
 `;

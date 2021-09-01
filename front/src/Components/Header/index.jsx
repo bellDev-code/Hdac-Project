@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderMenu from './Menu';
+import HeaderMenu from './HeaderMenu';
 import { Container, LogoWrapper, MenuWrapper, MenuButton } from './styles';
 
 const Header = () => {
