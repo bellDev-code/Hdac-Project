@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 export const Container = styled.section`
   display: flex;
   width: 100%;
+  background-color: #d96846;
 `;
 
 export const LogoWrapper = styled.div`
@@ -22,4 +23,5 @@ export const MenuButton = styled.button`
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+  color: #fff;
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Web3Provider } from '@ethersproject/providers';
+import { Web3ReactProvider } from '@web3-react/core';
 import GetLibrary from '@Metamask/Library';
 import Main from './Main';
 import Login from '@Pages/Login';
@@ -9,7 +9,7 @@ import Find from '@Pages/Find';
 
 const App = () => {
   return (
-    <Web3Provider getLibrary={GetLibrary}>
+    <Web3ReactProvider getLibrary={GetLibrary}>
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Main} />
@@ -18,7 +18,7 @@ const App = () => {
           <Route path="/find" component={Find} />
         </Switch>
       </BrowserRouter>
-    </Web3Provider>
+    </Web3ReactProvider>
   );
 };
 

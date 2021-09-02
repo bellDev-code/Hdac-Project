@@ -5,7 +5,7 @@ import { Container, LogoWrapper, MenuWrapper, MenuButton } from './styles';
 const Header = () => {
   return (
     <Container>
-      <LogoWrapper>로고</LogoWrapper>
+      <LogoWrapper></LogoWrapper>
       <MenuWrapper>
         <MenuButton>회사소개</MenuButton>
         <MenuButton>음원</MenuButton>

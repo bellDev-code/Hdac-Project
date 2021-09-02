@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 export const Container = styled.div`
   display: flex;
   flex: 1;
+  width: 100%;
+  height: 56px;
 `;
 
 export const LinkWrapper = styled.div`
@@ -13,5 +15,10 @@ export const LinkWrapper = styled.div`
   & > :link {
     text-decoration: none;
     padding: 5px;
+    color: #fff;
+  }
+
+  & > :visited {
+    color: #fff;
   }
 `;
