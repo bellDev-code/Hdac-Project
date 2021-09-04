@@ -11,6 +11,8 @@ function Account() {
     activate(injectedConnector);
   };
 
+  console.log(useWeb3React());
+
   const MetaIcon = styled.img`
     padding-left: 20px;
   `;
