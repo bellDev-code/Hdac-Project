@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const Button = styled.button`
   cursor: pointer;
-  background-color: #000;
+  background-color: #d96846;
   color: #fff;
   font-size: 12px;
   font-weight: 500;

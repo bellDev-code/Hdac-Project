@@ -30,6 +30,27 @@ export const LoginForm = styled.form`
   }
 `;
 
+export const LinkWrapper = styled.div`
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+
+  a:link {
+    max-width: 150px;
+    width: 100%;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: #000;
+  }
+
+  a:hover,
+  a:active {
+    color: #d96846;
+  }
+`;
+
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;

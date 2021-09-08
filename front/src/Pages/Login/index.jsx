@@ -2,7 +2,7 @@ import MiddleBtn from '@Components/Button';
 import LabelInput from '@Components/LabelInput';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, AccountForm, LoginForm, ButtonWrapper } from './styles';
+import { Container, AccountForm, LoginForm, ButtonWrapper, LinkWrapper } from './styles';
 
 const Login = () => {
   const LoginSubmit = (e) => {
@@ -19,10 +19,10 @@ const Login = () => {
           <ButtonWrapper>
             <MiddleBtn name="Login" type="submit" />
           </ButtonWrapper>
-          <Link to="/register" style={{ paddingTop: '20px' }}>
-            Create Your Account?
-          </Link>
-          <Link to="/find">Find Your Username?</Link>
+          <LinkWrapper>
+            <Link to="/register">Create Your Account?</Link>
+            <Link to="/find">Find Your Username?</Link>
+          </LinkWrapper>
         </LoginForm>
       </AccountForm>
     </Container>
