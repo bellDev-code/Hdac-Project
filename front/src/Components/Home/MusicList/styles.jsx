@@ -8,3 +8,5 @@ export const Title = styled.h1`
   font-size: 35px;
   margin: 0;
 `;
+
+export const ListWrapper = styled.div``;

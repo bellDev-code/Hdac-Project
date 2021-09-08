@@ -1,10 +1,14 @@
 import React from 'react';
-import { Container, Title } from './styles';
+import MusicCard from '../MusicCard';
+import { Container, Title, ListWrapper } from './styles';
 
 const MusicList = () => {
   return (
     <Container>
       <Title>Music List</Title>
+      <ListWrapper>
+        <MusicCard />
+      </ListWrapper>
     </Container>
   );
 };
