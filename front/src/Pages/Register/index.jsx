@@ -1,6 +1,7 @@
-import MiddleBtn from '@Components/Button/middleBtn';
+import MiddleBtn from '@Components/Button';
+import LabelInput from '@Components/LabelInput';
 import React from 'react';
-import { Container, AccountForm, RegisterForm, InputWrapper, ButtonWrapper } from './styles';
+import { Container, AccountForm, RegisterForm, ButtonWrapper } from './styles';
 
 const Register = () => {
   const RegisterSubmit = (e) => {
@@ -11,24 +12,12 @@ const Register = () => {
       <AccountForm>
         <h3>Register</h3>
         <RegisterForm onsubmit={RegisterSubmit}>
-          <InputWrapper>
-            <label>email</label>
-            <input type="email"></input>
-          </InputWrapper>
-          <InputWrapper>
-            <label>이름</label>
-            <input type="text"></input>
-          </InputWrapper>
-          <InputWrapper>
-            <label>비밀번호</label>
-            <input type="password"></input>
-          </InputWrapper>
-          <InputWrapper>
-            <label>비밀번호 확인</label>
-            <input type="password"></input>
-          </InputWrapper>
+          <LabelInput name="username" />
+          <LabelInput name="name" />
+          <LabelInput name="password" type="password" />
+          <LabelInput name="passwordConfirm" type="password" />
           <ButtonWrapper>
-            <MiddleBtn type="submit" />
+            <MiddleBtn name="Register" type="submit" />
           </ButtonWrapper>
         </RegisterForm>
       </AccountForm>

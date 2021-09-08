@@ -37,5 +37,4 @@ export const InputWrapper = styled.div`
 
 export const ButtonWrapper = styled.div`
   margin: auto;
-  padding-top: 30px;
 `;

@@ -33,5 +33,4 @@ export const LoginForm = styled.form`
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 30px;
 `;

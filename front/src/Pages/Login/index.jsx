@@ -1,4 +1,5 @@
-import MiddleBtn from '@Components/Button/middleBtn';
+import MiddleBtn from '@Components/Button';
+import LabelInput from '@Components/LabelInput';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, AccountForm, LoginForm, ButtonWrapper } from './styles';
@@ -13,12 +14,10 @@ const Login = () => {
       <AccountForm>
         <h3>Login</h3>
         <LoginForm onSubmit={LoginSubmit}>
-          <label>e-mail</label>
-          <input type="email" />
-          <label>password</label>
-          <input type="password" />
+          <LabelInput name="username" />
+          <LabelInput name="password" type="password" />
           <ButtonWrapper>
-            <MiddleBtn type="submit" />
+            <MiddleBtn name="Login" type="submit" />
           </ButtonWrapper>
           <Link to="/register" style={{ paddingTop: '20px' }}>
             Create Your Account?
