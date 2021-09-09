@@ -1,4 +1,5 @@
 import Artist from '@Components/Home/Artist';
+import GoodsList from '@Components/Home/Goods';
 import MainBanner from '@Components/Home/MainBanner';
 import MusicList from '@Components/Home/MusicList';
 import React from 'react';
@@ -10,6 +11,7 @@ const Home = () => {
       <MainBanner />
       <Artist />
       <MusicList />
+      <GoodsList />
     </Container>
   );
 };

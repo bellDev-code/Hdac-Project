@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Title, ArtistWrapper, StyledCarousel, Contents, ImageWrapper, Image, Text } from './styles';
+import { Container, Title, ArtistWrapper, StyledCarousel, Contents, ImageWrapper, Image } from './styles';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ImageUrl from '@Assets/Img/Artist/artist.jpg';
@@ -60,7 +60,6 @@ const Artist = () => {
                   <Image src={item.url} />
                 </ImageWrapper>
                 <Contents>{item.name}</Contents>
-                <Text>{item.text}</Text>
               </div>
             );
           })}
