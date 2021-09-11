@@ -11,13 +11,22 @@ export const ListWrapper = styled.div`
   display: flex;
 `;
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+  width: 30%;
+`;
 
-export const GoodsWrapper = styled.div``;
+export const GoodsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-export const ImageWrapper = styled.div``;
+export const ImageWrapper = styled.div`
+  flex: 1;
+`;
 
-export const Image = styled.img``;
+export const Image = styled.img`
+  width: 100%;
+`;
 
 export const TextWrapper = styled.div`
   text-align: center;

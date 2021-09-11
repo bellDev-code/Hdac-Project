@@ -5,6 +5,7 @@ import {
   ListWrapper,
   GoodsWrapper,
   ImageWrapper,
+  Wrapper,
   Image,
   TextWrapper,
   ContentsTitle,
@@ -34,7 +35,7 @@ const GoodsList = () => {
       <ListWrapper>
         {GoodsItems.map((item, index) => {
           return (
-            <div key={index}>
+            <Wrapper key={index}>
               <GoodsWrapper>
                 <ImageWrapper>
                   <Image src={item.url}></Image>
@@ -44,7 +45,7 @@ const GoodsList = () => {
                   <Contents>{item.intro}</Contents>
                 </TextWrapper>
               </GoodsWrapper>
-            </div>
+            </Wrapper>
           );
         })}
       </ListWrapper>
