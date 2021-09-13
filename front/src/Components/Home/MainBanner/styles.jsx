@@ -10,3 +10,13 @@ export const Container = styled.section`
   background-position: top;
   background-repeat: no-repeat;
 `;
+
+export const NewsList = styled.div``;
+
+export const Wrapper = styled.div``;
+
+export const ThumbWrapper = styled.div``;
+
+export const Thumbnail = styled.img`
+  width: 100%;
+`;
