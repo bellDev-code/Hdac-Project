@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex: 1;
   width: 100%;
-  height: 56px;
 `;
 
 export const LinkWrapper = styled.div`

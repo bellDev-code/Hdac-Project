@@ -7,10 +7,10 @@ const Header = () => {
     <Container>
       <LogoWrapper></LogoWrapper>
       <MenuWrapper>
-        <MenuButton>회사소개</MenuButton>
+        <MenuButton>COMPANY</MenuButton>
         <MenuButton>MUSIC</MenuButton>
         <MenuButton>ARTIST</MenuButton>
-        <MenuButton>투자 가이드</MenuButton>
+        <MenuButton>MARKET PLACE</MenuButton>
       </MenuWrapper>
       <HeaderMenu />
     </Container>

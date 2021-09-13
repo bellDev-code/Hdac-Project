@@ -15,6 +15,7 @@ function Account() {
 
   const MetaIcon = styled.img`
     padding-left: 20px;
+    cursor: pointer;
   `;
 
   return (
