@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Web3ReactProvider } from '@web3-react/core';
-import GetLibrary from '@Metamask/Library';
+import GetLibrary from '@Components/Metamask/Library';
 import Main from './Main';
 import Login from '@Pages/Login';
 import Register from '@Pages/Register';
