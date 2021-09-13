@@ -26,6 +26,12 @@ const GoodsItems = [
     name: 'IU(아이유) - 자전거',
     intro: '"아이유가 사용했던 자전거"',
   },
+  {
+    id: 3,
+    url: `${GoodsImage}`,
+    name: '카리나(에스파) - 자전거',
+    intro: '"카리나가 사용했던 자전거"',
+  },
 ];
 
 const GoodsList = () => {

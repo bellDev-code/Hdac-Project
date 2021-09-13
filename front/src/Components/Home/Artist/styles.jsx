@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Slider from 'react-slick';
 
 export const Container = styled.section`
-  padding: 50px 0;
+  padding-top: 50px;
 `;
 
 export const Title = styled.h1`
@@ -13,6 +13,10 @@ export const Title = styled.h1`
 export const ArtistWrapper = styled.div``;
 
 export const StyledCarousel = styled(Slider)`
+  .slick-list {
+    height: 50%;
+  }
+
   .slick-slide div {
     width: 100%;
     outline: none;
@@ -30,6 +34,10 @@ export const StyledCarousel = styled(Slider)`
   .slick-next {
     right: 30px;
   }
+`;
+
+export const Wrapper = styled.div`
+  cursor: pointer;
 `;
 
 export const ImageWrapper = styled.div`

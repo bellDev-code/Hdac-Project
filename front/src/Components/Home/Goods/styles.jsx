@@ -9,6 +9,8 @@ export const Title = styled.h1`
 
 export const ListWrapper = styled.div`
   display: flex;
+  justify-content: center;
+  padding: 15px 0;
 `;
 
 export const Wrapper = styled.div`
@@ -18,6 +20,12 @@ export const Wrapper = styled.div`
 export const GoodsWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 5px;
+  cursor: pointer;
+
+  :hover {
+    border: 1px solid #dee2e6;
+  }
 `;
 
 export const ImageWrapper = styled.div`
@@ -30,8 +38,14 @@ export const Image = styled.img`
 
 export const TextWrapper = styled.div`
   text-align: center;
+  padding: 20px 0;
 `;
 
-export const ContentsTitle = styled.div``;
+export const ContentsTitle = styled.div`
+  padding-bottom: 10px;
+  font-size: 1.3rem;
+`;
 
-export const Contents = styled.div``;
+export const Contents = styled.div`
+  padding-bottom: 10px;
+`;

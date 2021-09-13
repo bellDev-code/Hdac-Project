@@ -8,8 +8,9 @@ const Header = () => {
       <LogoWrapper></LogoWrapper>
       <MenuWrapper>
         <MenuButton>회사소개</MenuButton>
-        <MenuButton>음원</MenuButton>
-        <MenuButton>투자전략</MenuButton>
+        <MenuButton>MUSIC</MenuButton>
+        <MenuButton>ARTIST</MenuButton>
+        <MenuButton>투자 가이드</MenuButton>
       </MenuWrapper>
       <HeaderMenu />
     </Container>
