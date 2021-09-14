@@ -5,43 +5,24 @@
 //     port: 6379
 // });
 
-const db = {
+const dbInfo = {
     connectionLimit: 10,
     host: "127.0.0.1",
     user: "root",
     password: "welcome9s",
     database: "mufun",
 }
-// const dbPool = require('mysql').createPool(db);
-const dbPool = async() => {
-    return await require('mysql').createPool(db);}
 
+const dbPool = require('mysql').createPool(dbInfo);
 const sql = require('../config/sql.js');
 
-//dbPool.connect()
-
 module.exports = {
-    sendQuery : async (query, param='', where='') => {
-        try{
-            console.log("first")
-            dbPool.getConnection(function(err, connection){
-                if(!err){
-                    console.log("연결성공")
-                    var rows = connection.query(sql[query].query);
-                    console.log("##",JSON.stringify(rows),"#");
-                    connection.release();
-                    return JSON.stringify(rows);
-                }
-                else{
-                    console.log("test");
-                }
-            })
-          }
-          catch(err){
-            console.log(dbPool);
-            console.log(err);
-            throw err;
-          }
+    sendQuery : (query, param='', where='') => {
+        return new Promise((resolve, reject) => dbPool.query(sql[query].query, (error, results, fields) => {
+            if (error) {
+                resolve({error})
+            } else resolve(results)
+        }));
     }
 }
   
