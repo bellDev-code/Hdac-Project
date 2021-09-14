@@ -17,25 +17,19 @@ CREATE TABLE IF NOT EXISTS t_user
 
 ALTER TABLE t_user COMMENT '회원정보';
 
-
 -- t_artist Table Create SQL
 CREATE TABLE IF NOT EXISTS t_artist
 (
     `id`           INT            NOT NULL    AUTO_INCREMENT, 
     `email`        VARCHAR(45)    NOT NULL    COMMENT '아티스트 계정', 
     `artist_name`  VARCHAR(45)    NOT NULL    COMMENT '아티스트 명', 
-    `comment`      VARCHAR(45)    NULL        COMMENT '아티스트 설명', 
-    `image_src`    VARCHAR(45)    NULL        COMMENT '아티스트 사진주소', 
+    `comment`      VARCHAR(500)    NULL       COMMENT '아티스트 설명', 
+    `image_src`    VARCHAR(255)    NULL       COMMENT '아티스트 사진주소', 
     `nft_id`       INT            NULL        COMMENT '아티스트가 만든 음원',
     CONSTRAINT PK_ARTIST PRIMARY KEY (id, email)
 );
 
 ALTER TABLE t_artist COMMENT '등록된 아티스트 정보';
-
-ALTER TABLE t_artist
-    ADD CONSTRAINT FK_t_artist_email_t_user_email FOREIGN KEY (email)
-        REFERENCES t_user (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
 
 -- t_music_album Table Create SQL
 CREATE TABLE IF NOT EXISTS t_music_album
@@ -49,7 +43,6 @@ CREATE TABLE IF NOT EXISTS t_music_album
 );
 
 ALTER TABLE t_music_album COMMENT 'NFT 음원의 앨범';
-
 
 -- t_product Table Create SQL
 CREATE TABLE IF NOT EXISTS t_product
@@ -66,7 +59,6 @@ CREATE TABLE IF NOT EXISTS t_product
 
 ALTER TABLE t_product COMMENT 'NFT 음원에 대한 굿즈_끝';
 
-
 -- t_music_nft Table Create SQL
 CREATE TABLE IF NOT EXISTS t_music_nft
 (
@@ -81,26 +73,6 @@ CREATE TABLE IF NOT EXISTS t_music_nft
 
 ALTER TABLE t_music_nft COMMENT 'NFT 음원 정보';
 
-ALTER TABLE t_music_nft
-    ADD CONSTRAINT FK_t_music_nft_email_t_artist_email FOREIGN KEY (email)
-        REFERENCES t_artist (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-ALTER TABLE t_music_nft
-    ADD CONSTRAINT FK_t_music_nft_album_id_t_music_album_album_id FOREIGN KEY (album_id)
-        REFERENCES t_music_album (album_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-
--- MARKET Table Create SQL
-CREATE TABLE IF NOT EXISTS MARKET
-(
-    `id`      INT    NOT NULL    AUTO_INCREMENT, 
-    `nft_id`  INT    NULL, 
-    CONSTRAINT PK_MARKET PRIMARY KEY (id)
-);
-
-ALTER TABLE MARKET COMMENT '트레이딩 관련';
-
-
 -- t_nft_owner Table Create SQL
 CREATE TABLE IF NOT EXISTS t_nft_owner
 (
@@ -113,20 +85,12 @@ CREATE TABLE IF NOT EXISTS t_nft_owner
 
 ALTER TABLE t_nft_owner COMMENT 'NFT 별 소유현황';
 
-ALTER TABLE t_nft_owner
-    ADD CONSTRAINT FK_t_nft_owner_nft_id_t_music_nft_nft_id FOREIGN KEY (nft_id)
-        REFERENCES t_music_nft (nft_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-ALTER TABLE t_nft_owner
-    ADD CONSTRAINT FK_t_nft_owner_email_t_user_email FOREIGN KEY (email)
-        REFERENCES t_user (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-
--- t_investment_list Table Create SQL
-CREATE TABLE IF NOT EXISTS t_investment_list
+-- t_investment Table Create SQL
+CREATE TABLE IF NOT EXISTS t_investment
 (
     `id`              INT            NOT NULL    AUTO_INCREMENT, 
     `nft_id`          INT            NOT NULL    COMMENT 'NFT 아이디', 
+    `status`          CHAR(1)        NOT NULL    COMMENT '투자진행여부(0:정상종료, 1:진행중, 2:보류, 3:중단 등)'
     `end_date`        DATETIME       NOT NULL    COMMENT '마감일', 
     `artist`          VARCHAR(45)    NOT NULL    COMMENT '아티스트명', 
     `target_amount`   INT            NOT NULL    COMMENT '목표금액,달성금액', 
@@ -134,12 +98,7 @@ CREATE TABLE IF NOT EXISTS t_investment_list
     CONSTRAINT PK_FUND PRIMARY KEY (id, nft_id)
 );
 
-ALTER TABLE t_investment_list COMMENT 'NFT 음원 펀딩 리스트들';
-
-ALTER TABLE t_investment_list
-    ADD CONSTRAINT FK_t_investment_list_nft_id_t_music_nft_nft_id FOREIGN KEY (nft_id)
-        REFERENCES t_music_nft (nft_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
+ALTER TABLE t_investment COMMENT 'NFT 음원 펀딩 리스트들';
 
 -- t_agreement Table Create SQL
 CREATE TABLE IF NOT EXISTS t_agreement
@@ -157,11 +116,6 @@ CREATE TABLE IF NOT EXISTS t_agreement
 
 ALTER TABLE t_agreement COMMENT '보안서약서 및 개인정보제공 동의 항목 내용_끝';
 
-ALTER TABLE t_agreement
-    ADD CONSTRAINT FK_t_agreement_email_t_user_email FOREIGN KEY (email)
-        REFERENCES t_user (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-
 -- t_user_nft_asset Table Create SQL
 CREATE TABLE IF NOT EXISTS t_user_nft_asset
 (
@@ -174,16 +128,10 @@ CREATE TABLE IF NOT EXISTS t_user_nft_asset
 
 ALTER TABLE t_user_nft_asset COMMENT '사용자가 가진 NFT 자산';
 
-ALTER TABLE t_user_nft_asset
-    ADD CONSTRAINT FK_t_user_nft_asset_email_t_user_email FOREIGN KEY (email)
-        REFERENCES t_user (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-
 -- t_cash_tx_history Table Create SQL
 CREATE TABLE IF NOT EXISTS t_cash_tx_history
 (
-    `id`         INT            NOT NULL    AUTO_INCREMENT, 
-    `email`      VARCHAR(45)    NOT NULL    COMMENT '사용자 이메일', 
+    `id`         INT            NOT NULL    AUTO_INCREMENT,
     `gubun`      CHAR(1)        NOT NULL    COMMENT '거래구분(0:매수, 1:매도, 2:선물받음, 3:선물보냄)', 
     `tx_amount`  INT            NOT NULL    COMMENT '거래금액', 
     `date`       DATETIME       NOT NULL    COMMENT '거래일(년월일시분초)', 
@@ -194,24 +142,10 @@ CREATE TABLE IF NOT EXISTS t_cash_tx_history
 
 ALTER TABLE t_cash_tx_history COMMENT '현금 거래 로그_끝';
 
-ALTER TABLE t_cash_tx_history
-    ADD CONSTRAINT FK_t_cash_tx_history_email_t_user_email FOREIGN KEY (email)
-        REFERENCES t_user (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-ALTER TABLE t_cash_tx_history
-    ADD CONSTRAINT FK_t_cash_tx_history_sender_t_user_email FOREIGN KEY (sender)
-        REFERENCES t_user (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-ALTER TABLE t_cash_tx_history
-    ADD CONSTRAINT FK_t_cash_tx_history_recipient_t_user_email FOREIGN KEY (recipient)
-        REFERENCES t_user (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-
 -- t_nft_tx_history Table Create SQL
 CREATE TABLE IF NOT EXISTS t_nft_tx_history
 (
-    `id`         INT            NOT NULL    AUTO_INCREMENT, 
-    `email`      VARCHAR(45)    NOT NULL    COMMENT '사용자 이메일', 
+    `id`         INT            NOT NULL    AUTO_INCREMENT,
     `nft_id`     VARCHAR(45)    NOT NULL    COMMENT 'NFT 아이디', 
     `gubun`      CHAR(1)        NOT NULL    COMMENT '거래구분(0:매수, 1:매도, 2:선물받음, 3:선물보냄)', 
     `tx_amount`  INT            NOT NULL    COMMENT '거래 수량', 
@@ -222,19 +156,6 @@ CREATE TABLE IF NOT EXISTS t_nft_tx_history
 );
 
 ALTER TABLE t_nft_tx_history COMMENT 'NFT 거래 로그_끝';
-
-ALTER TABLE t_nft_tx_history
-    ADD CONSTRAINT FK_t_nft_tx_history_sender_t_user_email FOREIGN KEY (sender)
-        REFERENCES t_user (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-ALTER TABLE t_nft_tx_history
-    ADD CONSTRAINT FK_t_nft_tx_history_recipient_t_user_email FOREIGN KEY (recipient)
-        REFERENCES t_user (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-ALTER TABLE t_nft_tx_history
-    ADD CONSTRAINT FK_t_nft_tx_history_email_t_user_email FOREIGN KEY (email)
-        REFERENCES t_user (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
 
 -- t_user_cash_asset Table Create SQL
 CREATE TABLE IF NOT EXISTS t_user_cash_asset
@@ -247,13 +168,8 @@ CREATE TABLE IF NOT EXISTS t_user_cash_asset
 
 ALTER TABLE t_user_cash_asset COMMENT '사용자가 가진 NFT 자산';
 
-ALTER TABLE t_user_cash_asset
-    ADD CONSTRAINT FK_t_user_cash_asset_email_t_user_email FOREIGN KEY (email)
-        REFERENCES t_user (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-
--- t_investment_status Table Create SQL
-CREATE TABLE IF NOT EXISTS t_investment_status
+-- t_user_investment_status Table Create SQL
+CREATE TABLE IF NOT EXISTS t_user_investment_status
 (
     `id`        INT            NOT NULL    AUTO_INCREMENT, 
     `email`     VARCHAR(45)    NULL        COMMENT '사용자 이메일', 
@@ -263,12 +179,7 @@ CREATE TABLE IF NOT EXISTS t_investment_status
     CONSTRAINT PK_FUNDING_MONITOR PRIMARY KEY (id)
 );
 
-ALTER TABLE t_investment_status COMMENT '계정별 현재 펀딩현황(NFT 자산현황과 다름)';
-
-ALTER TABLE t_investment_status
-    ADD CONSTRAINT FK_t_investment_status_email_t_user_email FOREIGN KEY (email)
-        REFERENCES t_user (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
+ALTER TABLE t_user_investment_status COMMENT '계정별 현재 펀딩현황(NFT 자산현황과 다름)';
 
 -- t_order_book Table Create SQL
 CREATE TABLE IF NOT EXISTS t_order_book
@@ -281,13 +192,3 @@ CREATE TABLE IF NOT EXISTS t_order_book
 );
 
 ALTER TABLE t_order_book COMMENT 'NFT 음원 굿즈 거래현황';
-
-ALTER TABLE t_order_book
-    ADD CONSTRAINT FK_t_order_book_email_t_user_email FOREIGN KEY (email)
-        REFERENCES t_user (email) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-ALTER TABLE t_order_book
-    ADD CONSTRAINT FK_t_order_book_product_id_t_product_product_id FOREIGN KEY (product_id)
-        REFERENCES t_product (product_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-
