@@ -13,4 +13,8 @@ router.get('/f1', controller.f1);
 router.get('/f2', controller.f2);
 
 
+router.get('/api/:alias', controller.getQuery);
+router.post('/api/:alias', controller.postQuery);
+
+
 module.exports = router;
