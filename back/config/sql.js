@@ -41,7 +41,9 @@ module.exports = {
     // 로그인 결과
     // 이메일, 비밀번호
     getUserAccount : {
-        query : ``
+        query : `select * 
+                 from t_user
+                 where email=? and pwd_hash=?`
     },
 
     // 아이디 찾기
@@ -52,7 +54,12 @@ module.exports = {
     // 회원가입
     // 이메일, 비밀번호, 약관동의 항목
     addUserAccount : {
-        query : ``
+        query : `insert into t_user 
+                    set email=?, name=?, pwd_hash=?, phone_number=?,
+                        bank_account=?, gubun=?, bank_type=?;
+                 insert into t_agreement
+                    set email=?, agree_1=?, agree_2=?, agree_3=?
+                        agree_4=?, agree_5=?, agree_6=?`
     },
 
     // 비밀번호 재설정
@@ -60,35 +67,43 @@ module.exports = {
         query : ``
     },
 
-
 // ---- 사용자 자산 화면 ----
 
     // 유저별 보유 NFT
     getUserNFT : {
-        query:``
+        query : `select *
+                 from t_user_nft_asset
+                 where email=?`
     },
     
     getUserCash : {
-        query:``
+        query : `select *
+                 from t_user_cash_asset
+                 where email=?`
     },
     
     getCashTxHistory : {
-
+        query : `select *
+                 from t_cash_tx_history
+                 where sender=? or recipient=?`
     },
 
     getNFTTxHistory : {
-
+        query : `select *
+                 from t_nft_tx_history
+                 where sender=? or recipient=?`
     },
 
-    updateFunding : {
-        
+    addFundingList : {
+        query : `insert into t_investment
+                 set nft_id=?, status=1, end_date=?, artist=?, target_amount=?, current_amount=?`
     },
 
-    testQuery : {
-        query : `select * from t_test`
-    },
-    testQuery2 : {
-        query : `select * from t_test where testcol <= 1000`
+    updateFundingList : {
+        query : `delete from t_investment
+                 where nft_id=?`
     },
 
+    testQuery : { query : `select * from t_test` },
+    testQuery2 : { query : `select * from t_test where testcol <= 1000` },
 }
