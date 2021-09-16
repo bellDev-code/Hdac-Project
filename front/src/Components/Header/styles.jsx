@@ -22,7 +22,7 @@ export const MenuButton = styled.button`
   border: 0;
   background-color: transparent;
   font-size: 16px;
-  font-weight: 500;
   cursor: pointer;
   color: #fff;
+  font-family: 'Jua';
 `;
