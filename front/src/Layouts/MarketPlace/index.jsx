@@ -4,7 +4,9 @@ import Header from '@Components/Header';
 import Market from '@Pages/Market';
 import Footer from '@Components/Footer';
 
-const Container = styled.section``;
+const Container = styled.section`
+  font-family: 'Jua';
+`;
 
 const MarketPlace = () => {
   return (

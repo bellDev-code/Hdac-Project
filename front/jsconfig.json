@@ -7,7 +7,8 @@
       "@Layouts/*": ["src/Layouts/*"],
       "@Pages/*": ["src/Pages/*"],
       "@Utils/*": ["src/Utils/*"],
-      "@Assets/*": ["src/Assets/*"]
+      "@Assets/*": ["src/Assets/*"],
+      "@Fonts/*": ["src/Fonts/*"]
     }
   }
 }

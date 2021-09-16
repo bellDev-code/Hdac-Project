@@ -4,7 +4,9 @@ import Header from '@Components/Header';
 import Home from '@Pages/Home/';
 import Footer from '@Components/Footer';
 
-const Container = styled.section``;
+const Container = styled.section`
+  font-family: 'Jua';
+`;
 
 const Main = () => {
   return (

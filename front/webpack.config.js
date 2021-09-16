@@ -17,6 +17,7 @@ const config = {
       '@Pages': path.resolve(__dirname, 'src/Pages'),
       '@Utils': path.resolve(__dirname, 'src/Utils'),
       '@Assets': path.resolve(__dirname, 'src/Assets'),
+      '@Fonts': path.resolve(__dirname, 'src/Fonts'),
     },
   },
   entry: {

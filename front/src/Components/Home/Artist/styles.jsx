@@ -15,7 +15,7 @@ export const ArtistWrapper = styled.div``;
 
 export const StyledCarousel = styled(Slider)`
   .slick-list {
-    height: 50%;
+    height: 60%;
   }
 
   .slick-slide div {
