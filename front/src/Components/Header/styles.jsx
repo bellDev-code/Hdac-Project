@@ -12,6 +12,14 @@ export const LogoWrapper = styled.div`
   flex: 1;
 `;
 
+export const Logo = styled.div`
+  align-items: center;
+  padding: 0 0 0 50px;
+  font-size: 38px;
+  color: #fff;
+  cursor: pointer;
+`;
+
 export const MenuWrapper = styled.div`
   display: flex;
   flex: 1;

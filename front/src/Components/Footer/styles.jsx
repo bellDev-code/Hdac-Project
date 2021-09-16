@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
 
 export const Container = styled.section`
   min-height: 30vh;
+  padding: 0 50px;
+  background-color: #dee2e6;
 `;
 
 export const LinkWrapper = styled.div`
@@ -27,7 +28,7 @@ export const Contents = styled.div`
   flex-direction: column;
 `;
 
-export const EmailLink = styled(Link)``;
+export const EmailLink = styled.div``;
 
 export const Tell = styled.div``;
 

@@ -12,6 +12,7 @@ const Button = styled.button`
   letter-spacing: 2px;
   border: 0;
   padding: 16px 35px;
+  font-family: 'Jua';
 `;
 
 const middleBtn = ({ name }) => {

@@ -17,11 +17,18 @@ export const ContentsImage = styled.div`
 export const ContentsWrapper = styled.div`
   flex: 1;
   height: 500px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export const Title = styled.h1`
   margin: 0;
   font-size: 35px;
+  padding-bottom: 50px;
 `;
 
-export const Contents = styled.div``;
+export const Contents = styled.div`
+  padding-bottom: 50px;
+`;
