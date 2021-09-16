@@ -10,12 +10,18 @@ export const Wrapper = styled.div`
 `;
 
 export const ContentsImage = styled.div`
-  width: 450px;
-  background-color: white;
+  flex: 1;
   height: 500px;
-  margin: 50px 50px 50px 100px;
 `;
 
 export const ContentsWrapper = styled.div`
-  width: 450px;
+  flex: 1;
+  height: 500px;
 `;
+
+export const Title = styled.h1`
+  margin: 0;
+  font-size: 35px;
+`;
+
+export const Contents = styled.div``;
