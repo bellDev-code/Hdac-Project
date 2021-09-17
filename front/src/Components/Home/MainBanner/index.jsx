@@ -1,12 +1,17 @@
+import useScrollClipPath from '@Hooks/useScrollClipPath';
 import React from 'react';
 import { Container, Title, TitleTwo, Wrapper, SubTitle } from './styles';
 
 const MainBanner = () => {
+  const animated = useScrollClipPath();
   return (
     <Container>
-      <Wrapper>
+      <Wrapper {...animated}>
         <Title>
-          MU:SIC <TitleTwo>FUN:DING</TitleTwo>
+          <span>MU</span>:SIC{' '}
+          <TitleTwo>
+            <span>FUN</span>:DING
+          </TitleTwo>
         </Title>
         <SubTitle>
           국내 최초 블록체인

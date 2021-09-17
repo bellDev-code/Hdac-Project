@@ -7,10 +7,11 @@ import AlbumImage03 from '@Assets/Img/MusicList/butter.jpg';
 import AlbumImage04 from '@Assets/Img/MusicList/qeendom.jpg';
 import AlbumImage05 from '@Assets/Img/MusicList/sinho.jpg';
 import AlbumImage06 from '@Assets/Img/MusicList/weekend.jpg';
+import useScrollFadeIn from '@Hooks/useScrollFadeIn';
 
 const CardData = [
   {
-    id: 1,
+    id: 0,
     url: `${AlbumImage06}`,
     name: 'WEEKEND',
     artist: '태연',
@@ -19,7 +20,7 @@ const CardData = [
     exp: '20일',
   },
   {
-    id: 2,
+    id: 1,
     url: `${AlbumImage01}`,
     name: 'THE ALBUM',
     artist: '블랙핑크(BlackPink)',
@@ -28,7 +29,7 @@ const CardData = [
     exp: '30일',
   },
   {
-    id: 3,
+    id: 2,
     url: `${AlbumImage03}`,
     name: 'BUTTER',
     artist: '방탄소년단(BTS)',
@@ -37,7 +38,7 @@ const CardData = [
     exp: '13일',
   },
   {
-    id: 4,
+    id: 3,
     url: `${AlbumImage04}`,
     name: 'QUEENDOM',
     artist: '레드벨벳(RED VELVET)',
@@ -46,7 +47,7 @@ const CardData = [
     exp: '20일',
   },
   {
-    id: 5,
+    id: 4,
     url: `${AlbumImage02}`,
     name: 'NEXT LEVEL',
     artist: 'Aespa(에스파)',
@@ -55,7 +56,7 @@ const CardData = [
     exp: '30일',
   },
   {
-    id: 6,
+    id: 5,
     url: `${AlbumImage05}`,
     name: '신호등',
     artist: '이무진',
@@ -66,11 +67,19 @@ const CardData = [
 ];
 
 const MusicCard = () => {
+  const animatedItem = {
+    0: useScrollFadeIn('up', 1, 0),
+    1: useScrollFadeIn('up', 1, 0.2),
+    2: useScrollFadeIn('up', 1, 0.3),
+    3: useScrollFadeIn('up', 1, 0.4),
+    4: useScrollFadeIn('up', 1, 0.5),
+    5: useScrollFadeIn('up', 1, 0.6),
+  };
   return (
     <CardWrapper>
       {CardData.map((item, index) => {
         return (
-          <Wrapper key={index}>
+          <Wrapper key={index} {...animatedItem[index]}>
             <ImageWrapper>
               <CardImage src={item.url}></CardImage>
             </ImageWrapper>

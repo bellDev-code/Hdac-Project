@@ -5,7 +5,7 @@ import { Container, Title, ListWrapper } from './styles';
 const MusicList = () => {
   return (
     <Container>
-      <Title>Music List</Title>
+      <Title>FUNDING LIST</Title>
       <ListWrapper>
         <MusicCard />
       </ListWrapper>

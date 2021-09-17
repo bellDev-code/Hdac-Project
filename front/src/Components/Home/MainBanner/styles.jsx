@@ -22,10 +22,18 @@ export const Wrapper = styled.div`
 
 export const Title = styled.div`
   font-size: 60px;
+
+  & > span {
+    color: #d96846;
+  }
 `;
 
 export const TitleTwo = styled.div`
   text-align: right;
+
+  & > span {
+    color: #d96846;
+  }
 `;
 
 export const SubTitle = styled.div`
