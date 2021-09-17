@@ -15,7 +15,7 @@ export const ListWrapper = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  width: 30%;
+  width: 25%;
 `;
 
 export const GoodsWrapper = styled.div`
