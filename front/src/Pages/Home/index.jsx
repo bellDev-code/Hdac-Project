@@ -10,8 +10,8 @@ const Home = () => {
   return (
     <Container>
       <MainBanner />
-      <Artist />
       <MusicList />
+      <Artist />
       <GoodsList />
       <News />
     </Container>
