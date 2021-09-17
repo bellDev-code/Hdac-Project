@@ -5,15 +5,28 @@ CREATE TABLE IF NOT EXISTS t_user
 (
     `id`            INT            NOT NULL    AUTO_INCREMENT, 
     `email`         VARCHAR(45)    NOT NULL    COMMENT '사용자 이메일', 
-    `name`          VARCHAR(10)    NOT NULL    COMMENT '사용자 명', 
-    `pwd_salt`      char(16)       NOT NULL    COMMENT '비밀번호 솔트값',
-    `pwd_hash`      char(64)       NOT NULL    COMMENT '비밀번호 해쉬값',
-    `phone_number`  char(11)       NULL        COMMENT '핸드폰인증', 
-    `bank_account`  varchar(30)    NULL        COMMENT '실계좌번호', 
-    `gubun`         CHAR(1)        NULL        COMMENT '카카오,일반계정 구분', 
-    `bank_type`     CHAR(1)        NULL        COMMENT '은행명', 
+    `nickname`      VARCHAR(16)    NOT NULL    COMMENT '사용자 닉네임', 
+    `provider`      CHAR(1)        NOT NULL    COMMENT '계정구분', --(로컬:0, 카카오:1, 네이버:2 등) 
+    `phone_number`  CHAR(11)       NULL        COMMENT '핸드폰인증', 
+    `bank_code`     CHAR(2)        NULL        COMMENT '은행코드', --(우리:00, 농협:01, 카뱅:02 등)
+    `bank_account`  VARCHAR(30)    NULL        COMMENT '실계좌번호', 
     CONSTRAINT PK_USER PRIMARY KEY (id, email)
 );
+CREATE TABLE IF NOT EXISTS t_auth_local
+(
+    `id`            INT            NOT NULL    AUTO_INCREMENT, 
+    `email`         VARCHAR(45)    NOT NULL    COMMENT '사용자 이메일', 
+    `pwd_hash`      CHAR(64)       NOT NULL    COMMENT '비밀번호 해쉬값', --bcrypt 사용할 예정
+    CONSTRAINT PK_USER PRIMARY KEY (id, email)
+);
+CREATE TABLE IF NOT EXISTS t_auth_social
+(
+    `id`            INT            NOT NULL    AUTO_INCREMENT, 
+    `email`         VARCHAR(45)    NOT NULL    COMMENT '사용자 이메일', 
+    `provider`      CHAR(1)        NOT NULL    COMMENT '계정구분', --(로컬:0, 카카오:1, 네이버:2 등) 
+    CONSTRAINT PK_USER PRIMARY KEY (id, email)
+);
+
 
 ALTER TABLE t_user COMMENT '회원정보';
 
@@ -23,8 +36,8 @@ CREATE TABLE IF NOT EXISTS t_artist
     `id`           INT            NOT NULL    AUTO_INCREMENT, 
     `email`        VARCHAR(45)    NOT NULL    COMMENT '아티스트 계정', 
     `artist_name`  VARCHAR(45)    NOT NULL    COMMENT '아티스트 명', 
-    `comment`      VARCHAR(500)    NULL       COMMENT '아티스트 설명', 
-    `image_src`    VARCHAR(255)    NULL       COMMENT '아티스트 사진주소', 
+    `comment`      VARCHAR(500)   NULL        COMMENT '아티스트 설명', 
+    `image_src`    VARCHAR(255)   NULL        COMMENT '아티스트 사진주소', 
     `nft_id`       INT            NULL        COMMENT '아티스트가 만든 음원',
     CONSTRAINT PK_ARTIST PRIMARY KEY (id, email)
 );
