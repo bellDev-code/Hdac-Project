@@ -11,7 +11,11 @@ export const Wrapper = styled.div`
 
 export const ContentsImage = styled.div`
   flex: 1;
-  height: 500px;
+  padding: 50px 50px 50px 100px;
+`;
+
+export const Image = styled.img`
+  width: 500px;
 `;
 
 export const ContentsWrapper = styled.div`

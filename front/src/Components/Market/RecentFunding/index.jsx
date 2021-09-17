@@ -4,7 +4,7 @@ import { Container, Title } from './styles';
 const RecentFunding = () => {
   return (
     <Container>
-      <Title>Recent Funding</Title>
+      <Title>RECENT FUNDING</Title>
     </Container>
   );
 };
