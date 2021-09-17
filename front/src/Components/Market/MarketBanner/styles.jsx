@@ -2,11 +2,12 @@ import styled from '@emotion/styled';
 
 export const Container = styled.section`
   background-color: #dee2e6;
-  height: 600px;
+  min-height: 80vh;
 `;
 
 export const Wrapper = styled.div`
   display: flex;
+  padding-top: 56px;
 `;
 
 export const ContentsImage = styled.div`
