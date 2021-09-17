@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardWrapper, Wrapper, ImageWrapper, CardImage, TextWrapper, CardInfo, CardFunding, CardDay } from './styles';
+import { CardWrapper, Wrapper, ImageWrapper, CardImage, TextWrapper, CardInfo, CardDay } from './styles';
 
 import AlbumImage01 from '@Assets/Img/MusicList/music03.jpg';
 import AlbumImage02 from '@Assets/Img/MusicList/aespa-album.jpg';
@@ -8,6 +8,7 @@ import AlbumImage04 from '@Assets/Img/MusicList/qeendom.jpg';
 import AlbumImage05 from '@Assets/Img/MusicList/sinho.jpg';
 import AlbumImage06 from '@Assets/Img/MusicList/weekend.jpg';
 import useScrollFadeIn from '@Hooks/useScrollFadeIn';
+import FundingPrice from '@Components/FundingPrice';
 
 const CardData = [
   {
@@ -15,8 +16,8 @@ const CardData = [
     url: `${AlbumImage06}`,
     name: 'WEEKEND',
     artist: '태연',
-    achieved: '3,000원',
-    goal: '8,000,000원',
+    achieved: 3000,
+    goal: 8000000,
     exp: '20일',
   },
   {
@@ -24,8 +25,8 @@ const CardData = [
     url: `${AlbumImage01}`,
     name: 'THE ALBUM',
     artist: '블랙핑크(BlackPink)',
-    achieved: '7,000원',
-    goal: '9,000,000원',
+    achieved: 7000,
+    goal: 9000000,
     exp: '30일',
   },
   {
@@ -33,8 +34,8 @@ const CardData = [
     url: `${AlbumImage03}`,
     name: 'BUTTER',
     artist: '방탄소년단(BTS)',
-    achieved: '10,000,000원',
-    goal: '10,000,000원',
+    achieved: 10000000,
+    goal: 10000000,
     exp: '13일',
   },
   {
@@ -42,8 +43,8 @@ const CardData = [
     url: `${AlbumImage04}`,
     name: 'QUEENDOM',
     artist: '레드벨벳(RED VELVET)',
-    achieved: '3,000원',
-    goal: '8,000,000원',
+    achieved: 3000,
+    goal: 8000000,
     exp: '20일',
   },
   {
@@ -51,8 +52,8 @@ const CardData = [
     url: `${AlbumImage02}`,
     name: 'NEXT LEVEL',
     artist: 'Aespa(에스파)',
-    achieved: '7,000원',
-    goal: '9,000,000원',
+    achieved: 7000,
+    goal: 9000000,
     exp: '30일',
   },
   {
@@ -60,8 +61,8 @@ const CardData = [
     url: `${AlbumImage05}`,
     name: '신호등',
     artist: '이무진',
-    achieved: '10,000,000원',
-    goal: '10,000,000원',
+    achieved: 10000000,
+    goal: 10000000,
     exp: '13일',
   },
 ];
@@ -87,9 +88,7 @@ const MusicCard = () => {
               <CardInfo>
                 {item.name} - {item.artist}
               </CardInfo>
-              <CardFunding>
-                {item.achieved}/{item.goal}
-              </CardFunding>
+              <FundingPrice item={item} />
               <CardDay>D-Day {item.exp}</CardDay>
             </TextWrapper>
           </Wrapper>
