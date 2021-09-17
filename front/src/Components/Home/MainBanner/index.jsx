@@ -1,10 +1,12 @@
+import useScrollClipPath from '@Hooks/useScrollClipPath';
 import React from 'react';
 import { Container, Title, TitleTwo, Wrapper, SubTitle } from './styles';
 
 const MainBanner = () => {
+  const animated = useScrollClipPath();
   return (
     <Container>
-      <Wrapper>
+      <Wrapper {...animated}>
         <Title>
           <span>MU</span>:SIC{' '}
           <TitleTwo>
