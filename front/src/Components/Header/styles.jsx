@@ -30,11 +30,16 @@ export const MenuWrapper = styled.div`
   justify-content: space-between;
 `;
 
-export const MenuButton = styled.button`
-  border: 0;
-  background-color: transparent;
-  font-size: 16px;
-  cursor: pointer;
-  color: #fff;
-  font-family: 'Jua';
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  & > a {
+    color: #fff;
+    text-decoration: none;
+
+    a:visited {
+      color: #fff;
+    }
+  }
 `;

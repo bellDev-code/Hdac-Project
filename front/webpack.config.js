@@ -51,7 +51,7 @@ const config = {
         exclude: path.join(__dirname, 'node_modules'),
       },
       {
-        test: /\.(png|jpe?g|gif|ico)$/i,
+        test: /\.(png|jpe?g|gif|ico|mp4)$/i,
         use: [
           {
             loader: 'file-loader',

@@ -7,6 +7,7 @@ import Login from '@Pages/Login';
 import Register from '@Pages/Register';
 import Find from '@Pages/Find';
 import MarketPlace from './MarketPlace';
+import Company from './Company';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/register" component={Register} />
           <Route path="/find" component={Find} />
           <Route path="/marketplace" component={MarketPlace} />
+          <Route path="/company" component={Company} />
         </Switch>
       </BrowserRouter>
     </Web3ReactProvider>
