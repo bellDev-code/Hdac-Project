@@ -6,8 +6,8 @@ const VideoBanner = () => {
   return (
     <VideoWrapper>
       <BannerTitle>
-        <Title></Title>
-        <SubTitle></SubTitle>
+        <Title>음악이 더 재밌어지는 방법,</Title>
+        <SubTitle>1000원으로 음악을 소유하다</SubTitle>
       </BannerTitle>
       <video autoPlay muted loop width="100%" height="100%">
         <source src={BannerVD} type="video/mp4" />
