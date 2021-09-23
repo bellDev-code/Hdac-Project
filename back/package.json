@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "bin": {
-    "back": "www.js"
-  },
   "scripts": {
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -23,5 +21,8 @@
     "passport": "^0.4.1",
     "passport-kakao": "^1.0.1",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
