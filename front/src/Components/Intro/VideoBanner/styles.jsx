@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
 
-export const VideoWrapper = styled.div`
+export const VideoWrapper = styled.section`
   width: 100%;
-  height: 500px;
+  min-height: 100vh;
   position: relative;
 `;
 
 export const BannerTitle = styled.div`
   position: absolute;
-  top: 40%;
-  right: 30%;
+  top: 45%;
+  right: 36%;
 `;
 
 export const Title = styled.h1`
