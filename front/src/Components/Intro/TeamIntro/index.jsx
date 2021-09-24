@@ -38,13 +38,20 @@ const TeamList = [
     name: '김기현',
     position: 'BlockChain',
   },
+  {
+    id: 3,
+    url: `${TeamImg03}`,
+    name: '김혜인',
+    position: 'planning',
+  },
 ];
 
 const TeamIntro = () => {
   const animatedItem = {
     0: useScrollFadeIn('left', 1, 0.1),
     1: useScrollFadeIn('left', 1, 0.2),
-    2: useScrollFadeIn('left', 1, 0.4),
+    2: useScrollFadeIn('left', 1, 0.3),
+    3: useScrollFadeIn('left', 1, 0.4),
   };
   return (
     <Container>
