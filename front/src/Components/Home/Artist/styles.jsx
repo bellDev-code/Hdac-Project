@@ -53,6 +53,7 @@ export const Image = styled.img`
 export const Contents = styled.div`
   text-align: center;
   font-size: 20px;
+  padding-top: 10px;
 `;
 
 export const Text = styled.div``;

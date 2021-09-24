@@ -3,11 +3,11 @@ import { Container, Title, ArtistWrapper, Wrapper, StyledCarousel, Contents, Ima
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import ImageUrl from '@Assets/Img/Artist/aespa.jpg';
-import ImageUrl01 from '@Assets/Img/Artist/bts.jpg';
-import ImageUrl02 from '@Assets/Img/Artist/lee.jpg';
-import ImageUrl03 from '@Assets/Img/Artist/redvelvet.jpg';
-import ImageUrl04 from '@Assets/Img/Artist/tae.jpg';
+import ImageUrl from '@Assets/Img/Artist/aespa-one.png';
+import ImageUrl01 from '@Assets/Img/Artist/bts-one.png';
+import ImageUrl02 from '@Assets/Img/Artist/lee-one.png';
+import ImageUrl03 from '@Assets/Img/Artist/redvelvet-one.png';
+import ImageUrl04 from '@Assets/Img/Artist/tae-one.png';
 
 const items = [
   {

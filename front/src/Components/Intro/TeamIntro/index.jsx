@@ -59,7 +59,7 @@ const TeamIntro = () => {
         <Name>TEAM</Name>
         <Title>세계 최초 음원 NFT 소유권</Title>
         <SubTitle>
-          내가 좋아하는 음원을 소유한다. <br />
+          내가 좋아하는 음원을 소유하여 <br />
           좋아하는 아티스트와 공유 <br />
           소유권으로 증명하는 나의 팬심
         </SubTitle>

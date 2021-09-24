@@ -16,11 +16,12 @@ export const TextWrapper = styled.div`
 export const Name = styled.div`
   font-size: 20px;
   font-weight: 600;
+  color: #d96846;
 `;
 
 export const Title = styled.h1`
-  font-size: 30px;
-  margin: 0 0 40px 0;
+  font-size: 40px;
+  margin: 20px 0 40px 0;
 `;
 
 export const SubTitle = styled.h3``;
