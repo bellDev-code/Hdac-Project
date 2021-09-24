@@ -7,7 +7,11 @@ export const Container = styled.section`
   justify-content: space-around;
 `;
 
-export const TextWrapper = styled.div``;
+export const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 
 export const Name = styled.div`
   font-size: 20px;
