@@ -4,82 +4,171 @@ const redisClient = redis.createClient({
     port: 6379
 });
 
-let ordNo = 0
-
-function checkOrderPair(key, newQuery) {
+const redisCmd = {
+    keys: function (key) {
+        return new Promise((resolve, reject) => {
+            redisClient.keys(key, (err, reply) => {
+                resolve(reply);
+            });
+        });
+    },
+    lset: function (key, idx, value) {
+        return new Promise((resolve, reject) => {
+            redisClient.lset(key, idx, JSON.stringify(value), (err, reply) => {
+                resolve(reply);
+            });
+        })
+    },
+    lrange: function (key, start = 0, end = -1) {
+        return new Promise((resolve, reject) => {
+            redisClient.lrange(key, start, end, (err, reply) => {
+                resolve(reply);
+            });
+        })
+    },
+    lpop: function (key) {
+        return new Promise((resolve, reject) => {
+            redisClient.lpop(key, (err, reply) => {
+                resolve(reply);
+            });
+        })
+    },
+    rpush: function (key, value) {
+        return new Promise((resolve, reject) => {
+            redisClient.RPUSH(key, JSON.stringify(value), function (err, reply) {
+                if (err) {
+                    console.log(err); // callback(err, null);
+                    return -1;
+                } else {
+                    return 1;
+                    //console.log(`[SUCCESS] ${result}, ${key}, ${JSON.stringify(value)}`);
+                }
+            });
+        })
+    },
+    lpush: function (key, value) {
+        return new Promise((resolve, reject) => {
+            redisClient.LPUSH(key, JSON.stringify(value), function (err, reply) {
+                if (err) {
+                    console.log(err); // callback(err, null);
+                    return -1;
+                } else {
+                    return 1;
+                    //console.log(`[SUCCESS] ${result}, ${key}, ${JSON.stringify(value)}`);
+                }
+            });
+        })
+    },
     // https://zzdd1558.tistory.com/220?category=718961
-    // input  : LRANGE B000002:buy:2000 0 0
-    // output : 1) "{\"ordNo\":501,\"ordDate\":1631808827548,\"orderer\":\"0x05cC9059d3c51533991E7bADC59Cc9B6fa51C530\",\"volume\":31}"
-    // input  : LSET B000002:buy:2000 0 "replaceVal"
-    // output : 1) "{\"ordNo\":501,\"ordDate\":163 ... :31}" --> "replaceVal"
     // input  : LLEN B000002:buy:2000
     // output : 현재길이가 나옴 2개 원소 보유시 2 return
+}
 
-    // console.log(key);
-    let filteredKeyList;
+let ordNo = 0
 
+async function validityCheck(orderer, key, offerVolume) {
+    var orderer = 0;
+    var keyItems = key.split(':');
+
+    var status = false;
+
+    if (offerVolume <= 0) {
+        status = true;
+    }
+    if ((keyItems.filter(item => item == undefined)).length > 0) {
+        status = true;
+    }
+    return status;
+}
+
+
+async function checkOrderPair(orderer, key, offerVolume) {
+    console.log(orderer, key, offerVolume);
     // 전체키 중 거래하는 항목과 일치하는 거래리스트를 가져옴
-    redisClient.keys('*', (err, result) => {
-        const originKey = key.split(':')
+    const keyData = key.split(':');
+    const nftID = keyData[0];
+    const orderType = keyData[1];
+    const amount = keyData[2];
 
-        let newNftId = originKey[0]
-        let newGubun = originKey[1]
-        let newAmount = originKey[2]
-        let sortedKeyList = (newGubun == "B" ? result.sort() : result.sort().reverse())
+    const keyList = await redisCmd.keys('*');
+    const filteredKeyList = (orderType == "B" ? keyList.sort() : keyList.sort().reverse())
+        .filter((item) => {
+            return nftID == item.split(':')[0] && orderType != item.split(':')[1];
+        });
 
-        filteredKeyList =
-            sortedKeyList.filter((item) => {
-                const oldKey = item.split(':')
+    for (var filteredKey of filteredKeyList) {
+        const filteredKeyData = filteredKey.split(':');
+        const filteredDataList = await redisCmd.lrange(filteredKey);
 
-                let oldNftId = oldKey[0]
-                let oldGubun = oldKey[1]
+        const oldAmount = filteredKeyData[2]
 
-                return newNftId == oldNftId && newGubun != oldGubun
-            });
+        var currentIdx = 0;
 
-        console.log("#", filteredKeyList);
+        // 제안한 가격보다 합리적(쌀때)
+        if (orderType == "B" || orderType == "S") {
+            if (amount >= oldAmount) {
+                for (var rawItem of filteredDataList) {
+                    var item = JSON.parse(rawItem);
 
+                    // 시장에 등록된 구매수량이 판매하려는 수량보다 작을 때
+                    if (offerVolume > item.volume) {
 
-        // 정렬된 키 리스트에서 키를 하나씩 조회함
+                        console.log(JSON.stringify(item), offerVolume, item.volume, offerVolume - item.volume);
 
-        for (var filteredKey of filteredKeyList) {
-            console.log("\n", key, filteredKey);
+                        offerVolume = offerVolume - item.volume;
+                        item.volume = 0;
+                        redisCmd.lpop(filteredKey);
 
-            var newOffer = key.split(':')[2]
-            var oldOffer = filteredKey.split(':')[2]
-
-            // 제안한 가격보다 합리적(쌀때)
-            if (newOffer < oldOffer) {
-                redisClient.lrange(`${filteredKey}`, 0, -1, (err, result) => {
-                    for (var item of result) {
-                        console.log("#", item);
+                        console.log(JSON.stringify(item), "\n");
+                        console.log(key, ">", filteredKey, "pair_less")
+                        // 완료된 거래 기록남기기 추가필요...
                     }
-                    console.log("\n")
-                });
-            }
-            // 제안한 가격에 거래가 불가능 할 경우 거래장부에 등록
 
+                    // 시장에 등록된 구매수량이 판매하려는 수량보다 클 때
+                    else if (offerVolume < item.volume) {
+
+                        console.log(JSON.stringify(item), offerVolume, item.volume, 0);
+
+                        item.volume = item.volume - offerVolume;
+                        offerVolume = 0;
+                        redisCmd.lset(filteredKey, currentIdx, item)
+
+                        console.log(key, ">", filteredKey, "pair_full - ", JSON.stringify(item), "\n");
+                        return -1;
+                        // 완료된 거래 기록남기기 추가필요...
+                    }
+
+                    currentIdx += 1;
+                }
+            }
+        } else {
+            console.log("default", orderType);
+            // 기능추가
 
         }
-    })
-
-    // 거래리스트에서 newQuery 에게 가장 최선인 것으로 연산
-
-    // redisClient.lrange(`${key}`, 0, -1, (err, result) => {
-    //     for (var row of result) {
-    //         var item = JSON.parse(row)
-    //         //if (item.volume) console.log(item);
-    //     }
-    // });
+    }
+    // 제안한 가격에 거래가 불가능 할 경우 거래장부에 등록
+    //sendOrder(nftID, (orderType == "B" ? true : false), orderer, amount, offerVolume)
+    return {
+        amount: amount,
+        volume: offerVolume
+    };
 }
-//testcase_rapid_order();
-checkOrderPair('A000001:B:1600', 100);
 
-function sendOrder(nftId, orderType = true, orderer, amount, volume) {
+// 주문 전송 redis
+async function sendOrder(nftId, orderType, orderer, amount, volume) {
+    if (validityCheck(orderer, key, offerVolume)) {
+        return -1;
+    }
 
-    let key =
-        orderType === true ? `${nftId}:B:${amount}` :
-        orderType === false ? `${nftId}:S:${amount}` : ''
+    console.log(nftId, orderType, orderer, amount, volume);
+
+    let key = `${nftId}:${orderType}:${amount}`
+
+    var pairResult = await checkOrderPair(orderer, key, volume);
+
+    amount = pairResult.amount;
+    volume = pairResult.volume;
 
     let value = {
         'ordNo': ordNo,
@@ -87,72 +176,51 @@ function sendOrder(nftId, orderType = true, orderer, amount, volume) {
         'orderer': orderer,
         'volume': volume,
     }
-
-    redisClient.LPUSH(`${key}`, JSON.stringify(value), function (err, result) {
-        if (err) {
-            console.log(err); // callback(err, null);
-            return;
-        } else {
-            //console.log(`[SUCCESS] ${result}, ${key}, ${JSON.stringify(value)}`);
-        }
-    });
-
-    redisClient.lrange(`${key}`, 0, -1, function (err, result) {
-        if (err) {
-            console.log(err); // callback(err, null);
-            return;
-        } else {
-            console.log(key, result);
-        }
-    })
+    console.log("##", key, value);
+    redisCmd.rpush(key, value);
+    //console.log(await redisCmd.lrange(key));
 
     ordNo += 1;
 }
 
-// make a orders (rapid)
-function testcase_rapid_order() {
+// 가짜 주문 생성
+async function testcase_rapid_order() {
     const maxOrders = 1000
+    const nftId_avgAmount = [
+        [
+            'A000001', 1000
+        ],
+        [
+            'B000002', 1500
+        ],
+        [
+            'C000003', 1200
+        ],
+        [
+            'D000004', 800
+        ],
+        [
+            'E000005', 900
+        ]
+    ]
+    const userAddr = [
+        '0x2D8043F4EeE9Fd69F95d132d368A335c7fBFCFcc',
+        '0x74606022451Fe552f70aE921aA8AAcA051C273e6',
+        '0xd1102105039728Cb93f27310DaF291941b91a26c',
+        '0x9728Cb93210503d10126DaF2110f2739a1941b9c',
+        '0x0AC9cd3c51533991E7059DC59C5bfa51C53c9B60',
+        '0x05cC9059d3c51533991E7bADC59Cc9B6fa51C530',
+        '0x3991E759d3c5bAD05cC90153C591C53c9BCfa560',
+        '0xdD05cE75c931CbA00539995C53Cc561faB95391C',
+    ]
 
-    redisClient.flushall();
+    //redisClient.flushall();
 
     while (true) {
         if (ordNo > maxOrders) {
-            setTimeout(function () {
-                redisClient.keys('*', function (err, keys) {
-                    console.log("####### RESULT #######")
-                    //console.log(keys.sort());
-                    console.log("######################")
-                })
-            }, 500)
+            //console.log(await redisCmd.keys('*'));
             break;
         }
-        const nftId_avgAmount = [
-            [
-                'A000001', 1000
-            ],
-            [
-                'B000002', 1500
-            ],
-            [
-                'C000003', 1200
-            ],
-            [
-                'D000004', 800
-            ],
-            [
-                'E000005', 900
-            ]
-        ]
-        const userAddr = [
-            '0x2D8043F4EeE9Fd69F95d132d368A335c7fBFCFcc',
-            '0x74606022451Fe552f70aE921aA8AAcA051C273e6',
-            '0xd1102105039728Cb93f27310DaF291941b91a26c',
-            '0x9728Cb93210503d10126DaF2110f2739a1941b9c',
-            '0x0AC9cd3c51533991E7059DC59C5bfa51C53c9B60',
-            '0x05cC9059d3c51533991E7bADC59Cc9B6fa51C530',
-            '0x3991E759d3c5bAD05cC90153C591C53c9BCfa560',
-            '0xdD05cE75c931CbA00539995C53Cc561faB95391C',
-        ]
 
         var rNFT = Math.floor(Math.random() * 4);
         var rUserIdx = Math.floor(Math.random() * 7);
@@ -169,14 +237,17 @@ function testcase_rapid_order() {
             userAddr[rUserIdx],
             nftId_avgAmount[rNFT][1] + (Math.floor(rAmount / 10) * 100),
             rVolume);
+
+        ordNo += 1;
     }
 }
 
-
+redisClient.flushall();
+// testcase_rapid_order();
+// checkOrderPair('0x05cC9059d3c515339___Wan9s_test__________', 'A000001:S:1600', 10000);
 
 
 module.exports = sendOrder
-
 
 /*
     * redis 값 삽입 or 수정 or 삭제마다 매매체결여부 확인
@@ -203,7 +274,7 @@ module.exports = sendOrder
                     [ ... ]
 
             sell(매매구분-매수) :
-                 가격 :
+                    가격 :
                     [ 주문번호1, 주문일자1, 원주문자1, 수량1 ],
                     [ 주문번호2, 주문일자2, 원주문자2, 수량2 ],
                     [ ... ]
