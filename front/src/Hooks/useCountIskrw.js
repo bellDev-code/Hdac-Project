@@ -1,9 +1,9 @@
+import { krwConvertor } from '@Utils/string';
 import { useRef, useEffect, useCallback } from 'react';
 
-const useScrollCount = (end, start = 0, duration = 300, delay = 0) => {
+const useScrollCount = (end, start = 0, duration = 3000, delay = 0, isKrw = false) => {
   const element = useRef();
   const observer = useRef(null);
-  const stepTime = Math.abs(Math.floor(duration / (end - start)));
 
   const onScroll = useCallback(
     ([entry]) => {
@@ -11,16 +11,31 @@ const useScrollCount = (end, start = 0, duration = 300, delay = 0) => {
       if (entry.isIntersecting) {
         let currentNumber = start;
         const counter = setInterval(() => {
-          currentNumber += 1;
-          current.innerHTML = currentNumber;
-          if (currentNumber === end) {
+          currentNumber += 30000;
+          if (isKrw) {
+            current.innerHTML = krwConvertor(currentNumber);
+          } else {
+            current.innerHTML = currentNumber;
+          }
+          if (currentNumber >= end) {
+            // end
+            // 오차 계산
+
+            currentNumber = end;
+
+            if (isKrw) {
+              current.innerHTML = krwConvertor(currentNumber);
+            } else {
+              current.innerHTML = currentNumber;
+            }
+
             clearInterval(counter);
             observer.current.disconnect(element.current);
           }
-        }, stepTime);
+        }, duration);
       }
     },
-    [end, start, stepTime, element, delay],
+    [end, start, duration, element, delay, isKrw],
   );
 
   useEffect(() => {
