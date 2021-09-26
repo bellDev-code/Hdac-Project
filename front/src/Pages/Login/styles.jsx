@@ -54,4 +54,12 @@ export const LinkWrapper = styled.div`
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+`;
+
+export const KakaoBtn = styled.img`
+  padding-top: 20px;
+  cursor: pointer;
 `;

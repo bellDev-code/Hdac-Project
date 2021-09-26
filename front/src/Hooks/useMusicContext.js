@@ -23,7 +23,7 @@ const CardData = [
     artist: '블랙핑크(BlackPink)',
     achieved: 7000,
     goal: 9000000,
-    exp: 1632282000000,
+    exp: 1635082000000,
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const CardData = [
     artist: '방탄소년단(BTS)',
     achieved: 10000000,
     goal: 10000000,
-    exp: 1636222000000,
+    exp: 1634282000000,
   },
   {
     id: 3,
@@ -50,7 +50,7 @@ const CardData = [
     artist: 'Aespa(에스파)',
     achieved: 7000,
     goal: 9000000,
-    exp: 1638282000000,
+    exp: 1635282000000,
   },
   {
     id: 5,
@@ -70,7 +70,7 @@ export const MusicContextProvider = ({ children }) => {
 
   const onSelected = useCallback(
     (id) => {
-      console.log(id);
+      // console.log(id);
       setSelected(id);
     },
     [setSelected],

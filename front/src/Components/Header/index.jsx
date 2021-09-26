@@ -10,8 +10,8 @@ const menuList = [
     url: '/company',
   },
   {
-    name: 'MUSIC',
-    url: '/music',
+    name: 'GOODS',
+    url: '/goods',
   },
   {
     name: 'ARTIST',
