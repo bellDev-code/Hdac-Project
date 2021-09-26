@@ -1,6 +1,7 @@
 import { MusicContext } from '@Hooks/useMusicContext';
 import useScrollFadeIn from '@Hooks/useScrollFadeIn';
 import React, { useContext } from 'react';
+
 import MusicCard from '../MusicCard';
 import { CardWrapper } from '../MusicCard/styles';
 import { Container, Title, ListWrapper } from './styles';

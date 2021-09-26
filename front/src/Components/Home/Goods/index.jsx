@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   Container,
   Title,
@@ -15,6 +15,7 @@ import GoodsImage from '@Assets/Img/Goods/aespa-goods.jpg';
 import GoodsImage02 from '@Assets/Img/Goods/lee-goods.jpg';
 import GoodsImage03 from '@Assets/Img/Goods/weekend-goods.jpg';
 import useScrollFadeIn from '@Hooks/useScrollFadeIn';
+import { useHistory } from 'react-router';
 
 const GoodsItems = [
   {
@@ -38,6 +39,12 @@ const GoodsItems = [
 ];
 
 const GoodsList = () => {
+  const history = useHistory();
+
+  const onClickToGoods = useCallback(() => {
+    history.push('/goods');
+  });
+
   const animatedItem = {
     0: useScrollFadeIn('left', 1, 0.1),
     1: useScrollFadeIn('left', 1, 0.2),
@@ -51,7 +58,7 @@ const GoodsList = () => {
         {GoodsItems.map((item, index) => {
           return (
             <Wrapper key={index} {...animatedItem[index]}>
-              <GoodsWrapper>
+              <GoodsWrapper onClick={onClickToGoods}>
                 <ImageWrapper>
                   <Image src={item.url}></Image>
                 </ImageWrapper>

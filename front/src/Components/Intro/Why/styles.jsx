@@ -18,7 +18,7 @@ export const CountWrapper = styled.div`
   justify-content: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: baseline;
 `;
 
 export const Title = styled.h1`
@@ -40,9 +40,13 @@ export const TitleWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const CountTitle = styled.div``;
+export const CountTitle = styled.div`
+  font-size: 30px;
+`;
 
-export const CountSubTitle = styled.div``;
+export const CountSubTitle = styled.div`
+  color: #757575;
+`;
 
 export const CountGoal = styled.div`
   font-size: 100px;

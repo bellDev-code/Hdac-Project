@@ -3,8 +3,10 @@ import { Wrapper, ImageWrapper, CardImage, TextWrapper, CardInfo, CardDay } from
 import FundingPrice from '@Components/FundingPrice';
 import { countDateByTimestamp } from '@Utils/date';
 import { MusicContext } from '@Hooks/useMusicContext';
+import { useHistory } from 'react-router';
 
 const MusicCard = ({ item, animatedItem }) => {
+  const history = useHistory();
   const { onSelected } = useContext(MusicContext);
 
   const onClick = useCallback(
@@ -15,8 +17,12 @@ const MusicCard = ({ item, animatedItem }) => {
     [onSelected],
   );
 
+  const onClickToMarket = useCallback(() => {
+    history.push('/marketplace');
+  }, [history]);
+
   return (
-    <Wrapper {...animatedItem}>
+    <Wrapper {...animatedItem} onClick={onClickToMarket}>
       <ImageWrapper onClick={onClick}>
         <CardImage src={item.url}></CardImage>
       </ImageWrapper>
