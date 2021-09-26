@@ -17,10 +17,20 @@ module.exports = {
     res.send(req.user);
   },
 
+  getOrders: async (req, res) => {
+    var result = await redis.getOrders(
+      req.query.keys,
+      req.query.start,
+      req.query.end,
+    )
+
+    res.send(result);
+  },
+
   marketOrder: (req, res) => {
     console.log(req.body);
 
-    redis(
+    redis.sendOrder(
       req.body.nftID,
       req.body.orderType,
       req.body.orderer,
