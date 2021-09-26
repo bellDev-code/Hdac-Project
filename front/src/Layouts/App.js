@@ -10,6 +10,7 @@ import MarketPlace from './MarketPlace';
 import Company from './Company';
 import { MusicContextProvider } from '@Hooks/useMusicContext';
 import Goods from './Goods';
+import Musician from './Musician';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/marketplace" component={MarketPlace} />
             <Route path="/company" component={Company} />
             <Route path="/goods" component={Goods} />
+            <Route path="/artist" component={Musician} />
           </Switch>
         </BrowserRouter>
       </MusicContextProvider>
