@@ -8,20 +8,23 @@ import Register from '@Pages/Register';
 import Find from '@Pages/Find';
 import MarketPlace from './MarketPlace';
 import Company from './Company';
+import { MusicContextProvider } from '@Hooks/useMusicContext';
 
 const App = () => {
   return (
     <Web3ReactProvider getLibrary={GetLibrary}>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Main} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/find" component={Find} />
-          <Route path="/marketplace" component={MarketPlace} />
-          <Route path="/company" component={Company} />
-        </Switch>
-      </BrowserRouter>
+      <MusicContextProvider>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Main} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/find" component={Find} />
+            <Route path="/marketplace" component={MarketPlace} />
+            <Route path="/company" component={Company} />
+          </Switch>
+        </BrowserRouter>
+      </MusicContextProvider>
     </Web3ReactProvider>
   );
 };

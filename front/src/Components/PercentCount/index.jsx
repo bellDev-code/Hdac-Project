@@ -16,7 +16,7 @@ const PercentCount = ({ item }) => {
 
   return (
     <GoalText>
-      <p ref={ref} />
+      <div ref={ref} />
     </GoalText>
   );
 };

@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import styled from '@emotion/styled';
 
-const Timer = (hoursMinSecs) => {
-  const { days = 29, hours = 23, minutes = 59, seconds = 59 } = hoursMinSecs;
-  const [[drs, hrs, mins, secs], setTime] = useState([days, hours, minutes, seconds]);
+const Timer = ({ expireTime }) => {
+  const extract = useCallback((time) => {
+    const date = new Date(time);
+    return [date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
+  }, []);
+
+  useEffect(() => {
+    // item update
+    setTime(extract(expireTime));
+  }, [expireTime]);
+
+  const [[drs, hrs, mins, secs], setTime] = useState(extract(expireTime));
 
   const tick = () => {
-    if (drs === 0 && hrs === 0 && mins === 0 && secs === 0) reset();
-    else if (drs === 0 && hrs === 0) {
+    if (drs === 0 && hrs === 0) {
       setTime([drs - 1, 23, 59, 59]);
     } else if (mins === 0 && secs === 0) {
       setTime([drs, hrs - 1, 59, 59]);
@@ -17,8 +25,6 @@ const Timer = (hoursMinSecs) => {
       setTime([drs, hrs, mins, secs - 1]);
     }
   };
-
-  const reset = () => setTime([parseInt(days), parseInt(hours), parseInt(minutes), parseInt(seconds)]);
 
   useEffect(() => {
     const timerId = setInterval(() => tick(), 1000);

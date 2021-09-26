@@ -16,7 +16,7 @@ const Footer = () => {
           <Address>서울시 영등포구 양평동 월드메디앙 4층 405호</Address>
         </Contents>
         <Contents>
-          <Link>깃허브 주소</Link>
+          <Link to="/">깃허브 주소</Link>
         </Contents>
       </ContentsWrapper>
     </Container>

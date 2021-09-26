@@ -7,7 +7,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 const config = {
   name: 'Hadac-Project',
   mode: isDevelopment ? 'development' : 'production',
-  devtool: !isDevelopment ? 'hidden-source-map' : 'eval',
+  devtool: isDevelopment ? 'hidden-source-map' : 'eval',
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
