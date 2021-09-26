@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import useScrollCount from '@Hooks/useScrollCount';
 
 const GoalText = styled.p`
+  margin: 0;
   & > span {
     padding: 3px;
     color: #ff0000;

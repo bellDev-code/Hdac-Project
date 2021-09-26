@@ -10,6 +10,7 @@ import {
   CountTitle,
   CountSubTitle,
   TitleWrapper,
+  PercentWrapper,
 } from './styles';
 
 const countItems = [
@@ -17,7 +18,14 @@ const countItems = [
     id: 0,
     title: '소유권 거래 수익률',
     subtitle: '20년-21년 기대수익률',
-    goal: 80,
+    goal: 24,
+    unit: '%',
+  },
+  {
+    id: 0,
+    title: '회원 증가율',
+    subtitle: '20년-21년 회원 증가율',
+    goal: 120,
     unit: '%',
   },
 ];
@@ -44,7 +52,10 @@ const WhyFunding = () => {
                 <CountTitle>{item.title}</CountTitle>
                 <CountSubTitle>{item.subtitle}</CountSubTitle>
               </TitleWrapper>
-              <PercentCount item={item} />
+              <PercentWrapper>
+                <PercentCount item={item} />
+                <div>{item.unit}</div>
+              </PercentWrapper>
             </Wrapper>
           );
         })}
