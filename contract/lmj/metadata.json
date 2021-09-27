@@ -1,0 +1,12 @@
+{
+    "attributes" : [ {
+      "trait_type" : "Breed",
+      "value" : "Maltipoo"
+    }, {
+      "trait_type" : "Eye color",
+      "value" : "Mocha"
+    } ],
+    "description" : "The world's most adorable and sensitive pup.",
+    "image" : "ipfs://QmZnia5tYeFvdfZfgPTvN3BPBsLxL5P3X2i36VpC6TJpNp",
+    "name" : "이무진 가을 타나 봐 600 600 (1)"
+}

@@ -1,0 +1,12 @@
+{
+    "attributes" : [ {
+      "trait_type" : "Breed",
+      "value" : "Maltipoo"
+    }, {
+      "trait_type" : "Eye color",
+      "value" : "Mocha"
+    } ],
+    "description" : "The world's most adorable and sensitive pup.",
+    "image" : "ipfs://QmYPRLhViFzY56LKR44T9L2y8LqcDzrydqCNTaBGVqG55V",
+    "name" : "이무진 신호등 600 600 (1)"
+}

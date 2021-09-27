@@ -1,0 +1,12 @@
+{
+    "attributes" : [ {
+      "trait_type" : "Breed",
+      "value" : "Maltipoo"
+    }, {
+      "trait_type" : "Eye color",
+      "value" : "Mocha"
+    } ],
+    "description" : "The world's most adorable and sensitive pup.",
+    "image" : "ipfs://QmNbWLkyjuksUTop6yGxxMPyWSrPcbKpaaLqrTZ9wgZwWy",
+    "name" : "bts Butter 600 600 (1)"
+}
